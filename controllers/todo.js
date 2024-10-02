@@ -1,15 +1,18 @@
 export const addTodo = (req, res, next) => {
-    req.json("Todo was added!");
-}
+  // Validate user inputs
+  // Write todo to database
+  // Response to request
+  res.json("Todo was added!");
+};
 
 export const getTodos = (req, res, next) => {
-    res.json("All todos!");
-}
+  res.json("All todos!");
+};
 
 export const updatedTodo = (req, res, next) => {
-    res.json("Todo updated!");
-}
+  res.json("Todo updated!");
+};
 
 export const deleteTodo = (req, res, next) => {
-res.json("Todo deletd!");
-}
+  res.json("Todo deletd!");
+};
