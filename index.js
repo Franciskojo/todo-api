@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import todoRouter from "./routes/todo.js";
 import userRouter from "./routes/user.js";
+import cors from "cors";
 
 
 // Connect to database
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 
 // Use routes
+app.use(cors());
 app.use(todoRouter);
 app.use(userRouter)
 
