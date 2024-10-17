@@ -67,8 +67,18 @@ export const loginUser = async (req, res, next) => {
   };
 }
 
-export const getProfile = (req, res, next) => {
-  res.json("User profile");
+export const getProfile = async (req, res, next) => {
+  try {
+    // Find authenticated user from database
+    const user = await UserModel
+    .findById(req.auth.id)
+    .select({password: false});
+    // Response request
+    res.json(user);
+  } catch (error) {
+    next(error)
+    
+  }
 }
 
 export const logoutUser = (req, res, next) => {
@@ -76,5 +86,13 @@ export const logoutUser = (req, res, next) => {
 }
 
 export const updateProfile =(req, res, next) => {
-  res.json("User profile updated");
+  try {
+    // Validate user input
+    const {} = updateProfileValidator.Validate(req.body) 
+
+    res.json("User profile updated");
+  } catch (error) {
+    next(error)
+    
+  }
 }

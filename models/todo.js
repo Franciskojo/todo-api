@@ -12,4 +12,6 @@ const todoSchema = new Schema({
     timestamps: true
 });
 
+todoSchema.plugin(toJSON)
+
 export const TodoModel = model("Todo", todoSchema);

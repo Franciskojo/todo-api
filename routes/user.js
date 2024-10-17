@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { getProfile, loginUser, logoutUser, registerUser, updateProfile,  } from "../controllers/user.js";
+import { getProfile, loginUser, logoutUser, registerUser, updateProfile, } from "../controllers/user.js";
 import { userAvatarUpload } from "../middleware/upload.js";
+import { hasPermission, isAuthenticated } from "../middleware/auth.js";
 
 //Create Router 
 const userRouter = Router();
@@ -10,12 +11,11 @@ userRouter.post("/users/register", registerUser);
 
 userRouter.post("/users/login", loginUser);
 
-userRouter.get("/user/me", getProfile);
+userRouter.get("/users/me", isAuthenticated, hasPermission("get_profile"), getProfile);
 
-userRouter.post("/users/logout", logoutUser);
+userRouter.post("/users/logout", isAuthenticated, logoutUser);
 
-userRouter.post("/users/me", userAvatarUpload.single("avatar"), updateProfile);
-
+userRouter.patch("/users/me", isAuthenticated, hasPermission("update_profile"), userAvatarUpload.single("avatar"), updateProfile);
 
 // Export router
 export default userRouter;
