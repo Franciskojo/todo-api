@@ -89,6 +89,7 @@ export const updateProfile =(req, res, next) => {
   try {
     // Validate user input
     const {} = updateProfileValidator.Validate(req.body) 
+    
 
     res.json("User profile updated");
   } catch (error) {
